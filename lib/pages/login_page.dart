@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 
-class StartPage extends StatefulWidget {
-  const StartPage({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
   @override
-  State<StartPage> createState() => _StartPageState();
+  State<LoginPage> createState() => _StartPageState();
 }
 
-class _StartPageState extends State<StartPage> {
+class _StartPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
@@ -19,91 +20,100 @@ class _StartPageState extends State<StartPage> {
             colors: [Colors.purple.shade900, Colors.purple.shade500],
           ),
         ),
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: Column(
-              children: [
-                SizedBox(height: 80),
-                Text(
-                  'Sign Up',
-                  style: TextStyle(
-                    fontSize: 45,
-                    fontWeight: FontWeight.bold,
-                  ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 80),
+            const Center(
+              child: Text(
+                'Sign Up',
+                style: TextStyle(
+                  fontSize: 45,
+                  fontWeight: FontWeight.bold,
                 ),
-                SizedBox(height: 50),
-                Text('Name'),
-                TextFormField(
-                  autocorrect: false,
-                  textInputAction: TextInputAction.next,
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.white24,
-                    contentPadding: EdgeInsets.symmetric(horizontal: 25),
-                    hintText: 'Your Name',
-                    hintStyle: TextStyle(
-                      color: Colors.white54,
-                    ),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(50)),
-                  ),
-                ),
-                Text('Email Address'),
-                TextFormField(
-                  autocorrect: false,
-                  textInputAction: TextInputAction.next,
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.white24,
-                    contentPadding: EdgeInsets.symmetric(horizontal: 25),
-                    hintText: 'test@gmail.com',
-                    hintStyle: TextStyle(
-                      color: Colors.white54,
-                    ),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(50)),
-                  ),
-                ),
-                Text('Password'),
-                TextFormField(
-                  autocorrect: false,
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.white24,
-                    contentPadding: EdgeInsets.symmetric(horizontal: 25),
-                    suffixIcon: Icon(Icons.remove_red_eye_outlined),
-                    hintText: 'Enter Password',
-                    hintStyle: TextStyle(
-                      color: Colors.white54,
-                    ),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(50)),
-                  ),
-                ),
-                SizedBox(height: 15),
-                ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.lightGreen,
-                      foregroundColor: Colors.white,
-                      fixedSize: Size(double.maxFinite, 45),
-                    ),
-                    onPressed: () {},
-                    child: Text('Create Account')),
-                SizedBox(height: 15),
-                Text('or Sign Up with'),
-                SizedBox(height: 15),
-                Row(
-                  children: [
-                    IconButton(onPressed: () {}, icon: Icon(Icons.home)),
-                    IconButton(onPressed: () {}, icon: Icon(Icons.home)),
-                    IconButton(onPressed: () {}, icon: Icon(Icons.home)),
-                    IconButton(onPressed: () {}, icon: Icon(Icons.home)),
-                  ],
-                )
-              ],
+              ),
             ),
-          ),
+            const SizedBox(height: 50),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15),
+              child: Text(
+                'Name',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+            ),
+            TextFormField(
+              autocorrect: false,
+              textInputAction: TextInputAction.next,
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.white24,
+                contentPadding: const EdgeInsets.symmetric(horizontal: 25),
+                hintText: 'Your Name',
+                hintStyle: const TextStyle(
+                  color: Colors.white54,
+                ),
+                border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(50)),
+              ),
+            ),
+            const SizedBox(height: 15),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15),
+              child: Text(
+                'Email Address',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+            ),
+            TextFormField(
+              autocorrect: false,
+              textInputAction: TextInputAction.next,
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.white24,
+                contentPadding: const EdgeInsets.symmetric(horizontal: 25),
+                hintText: 'test@gmail.com',
+                hintStyle: const TextStyle(
+                  color: Colors.white54,
+                ),
+                border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(50)),
+              ),
+            ),
+            const SizedBox(height: 15),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15),
+              child: Text(
+                'Password',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+            ),
+            TextFormField(
+              autocorrect: false,
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.white24,
+                contentPadding: const EdgeInsets.symmetric(horizontal: 25),
+                suffixIcon: const Icon(Icons.remove_red_eye_outlined),
+                hintText: 'Enter Password',
+                hintStyle: const TextStyle(
+                  color: Colors.white54,
+                ),
+                border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(50)),
+              ),
+            ),
+            const SizedBox(height: 25),
+            ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.lightGreen,
+                  foregroundColor: Colors.white,
+                  fixedSize: const Size(double.maxFinite, 45),
+                  textStyle: const TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                onPressed: () {},
+                child: const Text('Create Account')),
+          ],
         ),
       ),
     );
