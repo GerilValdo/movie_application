@@ -1,13 +1,19 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+
+import './sign_up_page.dart';
+
+import '../widgets/form_login.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+  static String routeName = '/login-page';
 
   @override
-  State<LoginPage> createState() => _StartPageState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _StartPageState extends State<LoginPage> {
+class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,99 +26,56 @@ class _StartPageState extends State<LoginPage> {
             colors: [Colors.purple.shade900, Colors.purple.shade500],
           ),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: ListView(
           children: [
             const SizedBox(height: 80),
-            const Center(
-              child: Text(
-                'Sign Up',
-                style: TextStyle(
-                  fontSize: 45,
-                  fontWeight: FontWeight.bold,
-                ),
+            const Text(
+              'Login',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 45,
+                fontWeight: FontWeight.bold,
               ),
             ),
             const SizedBox(height: 50),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15),
-              child: Text(
-                'Name',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-            ),
-            TextFormField(
-              autocorrect: false,
-              textInputAction: TextInputAction.next,
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.white24,
-                contentPadding: const EdgeInsets.symmetric(horizontal: 25),
-                hintText: 'Your Name',
-                hintStyle: const TextStyle(
-                  color: Colors.white54,
-                ),
-                border:
-                    OutlineInputBorder(borderRadius: BorderRadius.circular(50)),
-              ),
-            ),
-            const SizedBox(height: 15),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15),
-              child: Text(
-                'Email Address',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-            ),
-            TextFormField(
-              autocorrect: false,
-              textInputAction: TextInputAction.next,
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.white24,
-                contentPadding: const EdgeInsets.symmetric(horizontal: 25),
-                hintText: 'test@gmail.com',
-                hintStyle: const TextStyle(
-                  color: Colors.white54,
-                ),
-                border:
-                    OutlineInputBorder(borderRadius: BorderRadius.circular(50)),
-              ),
-            ),
-            const SizedBox(height: 15),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15),
-              child: Text(
-                'Password',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-            ),
-            TextFormField(
-              autocorrect: false,
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.white24,
-                contentPadding: const EdgeInsets.symmetric(horizontal: 25),
-                suffixIcon: const Icon(Icons.remove_red_eye_outlined),
-                hintText: 'Enter Password',
-                hintStyle: const TextStyle(
-                  color: Colors.white54,
-                ),
-                border:
-                    OutlineInputBorder(borderRadius: BorderRadius.circular(50)),
-              ),
-            ),
+            FormLogin(),
             const SizedBox(height: 25),
             ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.lightGreen,
-                  foregroundColor: Colors.white,
-                  fixedSize: const Size(double.maxFinite, 45),
-                  textStyle: const TextStyle(
-                      fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-                onPressed: () {},
-                child: const Text('Create Account')),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.lightGreen,
+                foregroundColor: Colors.white,
+                fixedSize: const Size(double.maxFinite, 45),
+                textStyle:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              onPressed: () {},
+              child:
+                  Text('Login', style: Theme.of(context).textTheme.titleMedium),
+            ),
+            SizedBox(height: 10),
+            RichText(
+              textAlign: TextAlign.center,
+              text: TextSpan(
+                text: 'Don\'t Have Account? ',
+                style: Theme.of(context).textTheme.bodyMedium,
+                children: [
+                  TextSpan(
+                    text: 'SignUp',
+                    style: TextStyle(
+                      color: Colors.blue,
+                      fontWeight: FontWeight.bold,
+                      decoration: TextDecoration.underline,
+                      decorationColor: Colors.blue,
+                    ),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        Navigator.pushReplacementNamed(
+                            context, SignUpPage.routeName);
+                      },
+                  )
+                ],
+              ),
+            ),
           ],
         ),
       ),
