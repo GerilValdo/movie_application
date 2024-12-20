@@ -17,44 +17,58 @@ class NewReleasesSeeMore extends StatelessWidget {
         Navigator.pushNamed(context, DetailMoviePage.routeName,
             arguments: dataMovie.id);
       },
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Flexible(
-            flex: 11,
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: NetworkImage(dataMovie.imagePosterMovieUrl)),
+      child: Container(
+        padding: const EdgeInsets.all(5),
+        decoration: BoxDecoration(
+          color: Colors.black.withOpacity(0.3),
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: MouseRegion(
+          cursor: SystemMouseCursors.click,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Flexible(
+                flex: 11,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: NetworkImage(dataMovie.imagePosterMovieUrl)),
+                  ),
+                ),
               ),
-            ),
-          ),
-          Flexible(
-            flex: 1,
-            child: Text(
-              dataMovie.titleMovie,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-            ),
-          ),
-          Flexible(
-            flex: 1,
-            child: Row(
-              children: [
-                const Icon(
-                  Icons.star_rounded,
-                  color: Colors.yellow,
+              Flexible(
+                  flex: 1,
+                  child: Text(
+                    dataMovie.titleMovie,
+                    maxLines: 1,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  )),
+              Flexible(
+                flex: 1,
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.star_rounded,
+                      color: Colors.yellow,
+                    ),
+                    const SizedBox(width: 5),
+                    Text(
+                      dataMovie.ratingMovie.toStringAsFixed(1),
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                  ],
                 ),
-                const SizedBox(width: 5),
-                Text(
-                  dataMovie.ratingMovie.toString(),
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

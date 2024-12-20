@@ -5,11 +5,12 @@ class Movie with ChangeNotifier {
       description,
       imageDetailMovieUrl,
       imagePosterMovieUrl,
-      movieDuration;
+      movieDuration,
+      releaseDate;
   int id;
   double ratingMovie;
 
-  // genreMovie,
+  List<int> genreMovie;
   // actorName,
   // imageActorUrl;
   bool isWishlist;
@@ -22,6 +23,8 @@ class Movie with ChangeNotifier {
     required this.imagePosterMovieUrl,
     required this.ratingMovie,
     required this.movieDuration,
+    required this.releaseDate,
+    required this.genreMovie,
     // required this.genreMovie,
     // required this.actorName,
     // required this.imageActorUrl,
@@ -41,6 +44,8 @@ class Movie with ChangeNotifier {
       imageDetailMovieUrl: json['backdrop_path'],
       imagePosterMovieUrl: json['poster_path'],
       movieDuration: json['movie_duration'],
+      releaseDate: json['release_date'],
+      genreMovie: json['genre_ids'],
       ratingMovie: (json['vote_average'] as num).toDouble(),
     );
   }

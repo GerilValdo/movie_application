@@ -1,5 +1,6 @@
 lib/providers/api_movie_now_playing.json
 lib/providers/api_movie_popular.json
+lib/providers/api_genre_movie_list.json
 
 
 

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import './providers/genre_movie_list.dart';
 import './providers/movies_new_releases.dart';
 import './providers/movies_popular.dart';
 
+import './pages/main_screen.dart';
 import './pages/new_releases_movie_page.dart';
 import './pages/sign_up_page.dart';
-import './pages/home_page.dart';
 import './pages/detail_movie_page.dart';
 import './pages/popular_movie_page.dart';
 import './pages/wishlist_movie_page.dart';
@@ -14,7 +15,7 @@ import './pages/profile_page.dart';
 import './pages/login_page.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -29,11 +30,16 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => MoviesPopular(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => GenreMovieList(),
         )
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          textTheme: TextTheme(
+          textTheme: const TextTheme(
+            displayMedium: TextStyle(color: Colors.white),
             titleMedium: TextStyle(
                 color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
             bodyMedium: TextStyle(
@@ -42,16 +48,17 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
-        home: HomePage(),
+        home: const MainScreenPage(),
         routes: {
-          SignUpPage.routeName: (context) => SignUpPage(),
-          LoginPage.routeName: (context) => LoginPage(),
-          HomePage.routeName: (context) => HomePage(),
-          DetailMoviePage.routeName: (context) => DetailMoviePage(),
-          PopularMoviePage.routeName: (context) => PopularMoviePage(),
-          NewReleasesMoviePage.routeName: (context) => NewReleasesMoviePage(),
-          WishlistMoviePage.routeName: (context) => WishlistMoviePage(),
-          ProfilePage.routeName: (context) => ProfilePage(),
+          SignUpPage.routeName: (context) => const SignUpPage(),
+          LoginPage.routeName: (context) => const LoginPage(),
+          MainScreenPage.routeName: (context) => const MainScreenPage(),
+          DetailMoviePage.routeName: (context) => const DetailMoviePage(),
+          PopularMoviePage.routeName: (context) => const PopularMoviePage(),
+          NewReleasesMoviePage.routeName: (context) =>
+              const NewReleasesMoviePage(),
+          WishlistMoviePage.routeName: (context) => const WishlistMoviePage(),
+          ProfilePage.routeName: (context) => const ProfilePage(),
         },
       ),
     );

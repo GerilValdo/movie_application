@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../providers/genre_movie_list.dart';
 import '../providers/movies_new_releases.dart';
 import '../providers/movies_popular.dart';
 
-class DetailMoviePage extends StatelessWidget {
+class DetailMoviePage extends StatefulWidget {
   const DetailMoviePage({super.key});
   static String routeName = '/detail-movie-page';
 
+  @override
+  State<DetailMoviePage> createState() => _DetailMoviePageState();
+}
+
+class _DetailMoviePageState extends State<DetailMoviePage> {
   @override
   Widget build(BuildContext context) {
     final movieId = ModalRoute.of(context)!.settings.arguments as int;
@@ -16,6 +22,8 @@ class DetailMoviePage extends StatelessWidget {
     dynamic dataMoviePopular =
         Provider.of<MoviesPopular>(context).findById(movieId);
     final selectedMovie = dataMoviePopular ?? dataMovieNewReleases;
+    final genreProvider = Provider.of<GenreMovieList>(context);
+    final matchingGenre = genreProvider.getGenreByIds(selectedMovie.genreMovie);
 
     return Scaffold(
       body: Container(
@@ -58,12 +66,35 @@ class DetailMoviePage extends StatelessWidget {
                       children: [
                         Text(selectedMovie.titleMovie,
                             style: Theme.of(context).textTheme.titleMedium),
-                        const Text('Mystery • Action'),
+                        Wrap(
+                          spacing: 8,
+                          children: matchingGenre.map((genre) {
+                            int index = matchingGenre.indexOf(genre);
+                            return Text(index < matchingGenre.length - 1
+                                ? '${genre['name']} \u2022'
+                                : genre['name']);
+                          }).toList(),
+                        ),
                       ],
                     ),
                   ),
                 ),
                 AppBar(
+                  leading: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.black.withOpacity(0.5),
+                      shape: BoxShape.circle,
+                    ),
+                    child: IconButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        icon: const Icon(
+                          Icons.arrow_back,
+                          color: Colors.white,
+                          size: 30,
+                        )),
+                  ),
                   toolbarHeight: 120,
                   backgroundColor: Colors.transparent,
                   actions: [
@@ -73,14 +104,25 @@ class DetailMoviePage extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: Colors.black.withOpacity(0.5),
                           shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(10),
                         ),
                         child: IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.bookmark_border_outlined,
-                              color: Colors.white,
-                              size: 30,
-                            )),
+                            onPressed: () {
+                              setState(() {
+                                selectedMovie.statusWishlist();
+                              });
+                            },
+                            icon: (selectedMovie.isWishlist)
+                                ? const Icon(
+                                    Icons.bookmark,
+                                    color: Colors.yellow,
+                                    size: 30,
+                                  )
+                                : const Icon(
+                                    Icons.bookmark_border_outlined,
+                                    color: Colors.yellow,
+                                    size: 30,
+                                  )),
                       ),
                     ),
                   ],
@@ -96,7 +138,7 @@ class DetailMoviePage extends StatelessWidget {
                     const Icon(
                       Icons.star_rate_rounded,
                       color: Colors.yellow,
-                      size: 45,
+                      size: 35,
                     ),
                     const SizedBox(width: 5),
                     Column(
@@ -106,7 +148,7 @@ class DetailMoviePage extends StatelessWidget {
                           'IMDB Rating',
                           style: Theme.of(context).textTheme.bodyMedium,
                         ),
-                        Text(selectedMovie.ratingMovie.toString()),
+                        Text(selectedMovie.ratingMovie.toStringAsFixed(1)),
                       ],
                     ),
                   ],
@@ -116,7 +158,7 @@ class DetailMoviePage extends StatelessWidget {
                     const Icon(
                       Icons.access_time_filled,
                       color: Colors.yellow,
-                      size: 40,
+                      size: 35,
                     ),
                     const SizedBox(width: 5),
                     Column(
@@ -124,6 +166,23 @@ class DetailMoviePage extends StatelessWidget {
                       children: [
                         const Text('Duration'),
                         Text(selectedMovie.movieDuration),
+                      ],
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    const Icon(
+                      Icons.calendar_today,
+                      color: Colors.yellow,
+                      size: 35,
+                    ),
+                    const SizedBox(width: 5),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text('Release Date'),
+                        Text(selectedMovie.releaseDate),
                       ],
                     ),
                   ],
@@ -143,38 +202,6 @@ class DetailMoviePage extends StatelessWidget {
                   Text(
                     selectedMovie.description,
                     textAlign: TextAlign.justify,
-                  ),
-                  const SizedBox(height: 15),
-                  Text(
-                    'Actors',
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
-                  GridView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: 10,
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: 2 / 0.7,
-                    ),
-                    itemBuilder: (context, index) {
-                      return const Row(
-                        children: [
-                          CircleAvatar(
-                            radius: 25,
-                          ),
-                          SizedBox(width: 5),
-                          Expanded(
-                            child: Text(
-                              'Nama Actor',
-                              softWrap: true,
-                              maxLines: 2,
-                            ),
-                          ),
-                        ],
-                      );
-                    },
                   ),
                 ],
               ),

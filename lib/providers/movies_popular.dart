@@ -15,8 +15,16 @@ class MoviesPopular with ChangeNotifier {
         .toList();
   }
 
-  Movie findById(movieId) {
-    return _allMovie.firstWhere((movId) => movId.id == movieId);
+  Movie? findById(movieId) {
+    return _allMovie.where((movId) => movId.id == movieId).firstOrNull;
+  }
+
+  List<Movie> get wishlistMovies =>
+      _allMovie.where((movie) => movie.isWishlist).toList();
+
+  void removeFromWishlist(Movie movie) {
+    movie.isWishlist = false;
+    notifyListeners();
   }
 
   List<Map<String, dynamic>> dataMoviePopular = [

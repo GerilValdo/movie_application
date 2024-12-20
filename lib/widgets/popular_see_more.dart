@@ -4,8 +4,8 @@ import 'package:provider/provider.dart';
 import '../models/movie.dart';
 import '../pages/detail_movie_page.dart';
 
-class RowNewReleaseMovie extends StatelessWidget {
-  const RowNewReleaseMovie({
+class PopularSeeMore extends StatelessWidget {
+  const PopularSeeMore({
     super.key,
   });
 
@@ -23,54 +23,44 @@ class RowNewReleaseMovie extends StatelessWidget {
           color: Colors.black.withOpacity(0.3),
           borderRadius: BorderRadius.circular(15),
         ),
-        height: 250,
-        width: 150,
-        margin: const EdgeInsets.only(left: 20),
         child: MouseRegion(
           cursor: SystemMouseCursors.click,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Flexible(
-                flex: 3,
+                flex: 11,
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     image: DecorationImage(
-                      fit: BoxFit.fill,
-                      image: NetworkImage(dataMovie.imagePosterMovieUrl),
-                    ),
+                        fit: BoxFit.cover,
+                        image: NetworkImage(dataMovie.imagePosterMovieUrl)),
                   ),
                 ),
               ),
-              const SizedBox(height: 10),
+              Flexible(
+                  flex: 1,
+                  child: Text(
+                    dataMovie.titleMovie,
+                    maxLines: 1,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                        overflow: TextOverflow.ellipsis),
+                  )),
               Flexible(
                 flex: 1,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                child: Row(
                   children: [
-                    Text(
-                      dataMovie.titleMovie,
-                      style: const TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 15),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
+                    const Icon(
+                      Icons.star_rounded,
+                      color: Colors.yellow,
                     ),
-                    Row(
-                      children: [
-                        const Icon(
-                          Icons.star_rate_rounded,
-                          size: 18,
-                          color: Colors.yellow,
-                        ),
-                        const SizedBox(width: 5),
-                        Text(
-                          dataMovie.ratingMovie.toStringAsFixed(1),
-                          style: const TextStyle(
-                            fontSize: 18,
-                          ),
-                        ),
-                      ],
+                    const SizedBox(width: 5),
+                    Text(
+                      dataMovie.ratingMovie.toStringAsFixed(1),
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ],
                 ),

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-import './home_page.dart';
+import '../pages/main_screen.dart';
+import '../widgets/value_interests.dart';
 import './wishlist_movie_page.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -9,104 +12,185 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const String instagramUrl = 'https://www.instagram.com/gerilmanday/';
+    const String githubUrl = 'https://github.com/GerilValdo';
+    const String linkedinUrl =
+        'https://www.linkedin.com/in/geril-jatsiah-manday/';
+
+    Future<void> launchInstagram() async {
+      final Uri url = Uri.parse(instagramUrl);
+      if (await canLaunchUrl(url)) {
+        await launchUrl(url, mode: LaunchMode.externalApplication);
+      } else {
+        throw 'Could not launch $instagramUrl';
+      }
+    }
+
+    Future<void> launchGithub() async {
+      final Uri url = Uri.parse(githubUrl);
+      if (await canLaunchUrl(url)) {
+        await launchUrl(url, mode: LaunchMode.externalApplication);
+      } else {
+        throw 'Could not launch $githubUrl';
+      }
+    }
+
+    Future<void> launchLinkedin() async {
+      final Uri url = Uri.parse(linkedinUrl);
+      if (await canLaunchUrl(url)) {
+        await launchUrl(url, mode: LaunchMode.externalApplication);
+      } else {
+        throw 'Could not launch $linkedinUrl';
+      }
+    }
+
     return Scaffold(
-      body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [Colors.purple.shade900, Colors.purple.shade500],
-          ),
-        ),
-        child: Center(
-          child: Column(
+      body: ListView(
+        children: [
+          Stack(
             children: [
-              SizedBox(height: 80),
-              CircleAvatar(
-                radius: 80,
-              ),
-              Text(
-                'Nama User',
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
-              Text(
-                'email User',
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
-              SizedBox(height: 15),
               Container(
                 width: double.infinity,
-                height: 40,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(25),
-                  color: Colors.white.withOpacity(0.3),
-                ),
-                child: ListTile(
-                  onTap: () => Navigator.pushReplacementNamed(
-                      context, WishlistMoviePage.routeName),
-                  minTileHeight: 35,
-                  contentPadding: EdgeInsets.symmetric(horizontal: 15),
-                  leading: Icon(
-                    Icons.bookmark_outlined,
-                    color: Colors.white,
-                  ),
-                  title: Text(
-                    'Wishlist',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  trailing: Icon(
-                    Icons.arrow_forward_ios_rounded,
-                    color: Colors.white,
-                  ),
+                height: 160,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('assets/image/bg_start_page.jpg'),
+                      fit: BoxFit.cover),
                 ),
               ),
-              SizedBox(height: 15),
-              Container(
-                width: double.infinity,
-                height: 40,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(25),
-                  color: Colors.white.withOpacity(0.3),
-                ),
-                child: ListTile(
-                  minTileHeight: 35,
-                  contentPadding: EdgeInsets.symmetric(horizontal: 15),
-                  leading: Icon(
-                    Icons.logout,
-                    color: Colors.white,
-                  ),
-                  title: Text(
-                    'Logout',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold),
-                  ),
+              Center(
+                child: Column(
+                  children: [
+                    const SizedBox(height: 80),
+                    CircleAvatar(
+                      radius: 80,
+                      backgroundColor: Colors.black,
+                      child: Container(
+                        height: 150,
+                        width: 150,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(100),
+                            image: const DecorationImage(
+                                image: AssetImage(
+                                    'assets/image/photo_profile.jpg'),
+                                fit: BoxFit.cover)),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    Text(
+                      'Geril Valdo Jatsiah Manday',
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    Text(
+                      'Flutter Developer',
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                    const SizedBox(height: 15),
+                    const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.location_on_outlined,
+                          color: Colors.white,
+                        ),
+                        SizedBox(width: 5),
+                        Text('Kab. Bogor'),
+                        SizedBox(width: 15),
+                        Icon(Icons.record_voice_over_outlined,
+                            color: Colors.white),
+                        SizedBox(width: 5),
+                        Text('Indonesia'),
+                      ],
+                    ),
+                    const SizedBox(height: 25),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white.withOpacity(0.1),
+                              shape: const CircleBorder(),
+                              fixedSize: const Size.fromRadius(30),
+                              padding: EdgeInsets.zero),
+                          onPressed: () {
+                            launchInstagram();
+                          },
+                          child: const FaIcon(
+                            FontAwesomeIcons.instagram,
+                            color: Colors.white,
+                          ),
+                        ),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white.withOpacity(0.1),
+                              shape: const CircleBorder(),
+                              fixedSize: const Size.fromRadius(30),
+                              padding: EdgeInsets.zero),
+                          onPressed: () {
+                            launchGithub();
+                          },
+                          child: const FaIcon(
+                            FontAwesomeIcons.github,
+                            color: Colors.white,
+                          ),
+                        ),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white.withOpacity(0.1),
+                              shape: const CircleBorder(),
+                              fixedSize: const Size.fromRadius(30),
+                              padding: EdgeInsets.zero),
+                          onPressed: () {
+                            launchLinkedin();
+                          },
+                          child: const FaIcon(
+                            FontAwesomeIcons.linkedin,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 25),
+                    Container(
+                      width: double.infinity,
+                      height: 150,
+                      margin: const EdgeInsets.all(15),
+                      padding: const EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.white.withOpacity(0.1),
+                      ),
+                      child: const Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('INTERESTS'),
+                          SizedBox(height: 10),
+                          ValueInterests(),
+                        ],
+                      ),
+                    )
+                  ],
                 ),
               ),
             ],
           ),
-        ),
+        ],
       ),
+      backgroundColor: Colors.black,
       bottomNavigationBar: BottomNavigationBar(
-        items: [
-          const BottomNavigationBarItem(
-              icon: Icon(Icons.home_filled), label: 'Home'),
-          const BottomNavigationBarItem(
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: 'Home'),
+          BottomNavigationBarItem(
               icon: Icon(Icons.bookmark), label: 'Wishlist'),
-          const BottomNavigationBarItem(
+          BottomNavigationBarItem(
               icon: Icon(Icons.person_outline), label: 'Profile'),
         ],
         currentIndex: 2,
         onTap: (index) {
           if (index == 0) {
-            Navigator.pushReplacementNamed(context, HomePage.routeName);
+            Navigator.pushReplacementNamed(context, MainScreenPage.routeName);
           } else if (index == 1) {
             Navigator.pushReplacementNamed(
                 context, WishlistMoviePage.routeName);
