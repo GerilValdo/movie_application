@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           textTheme: const TextTheme(
-            displayMedium: TextStyle(color: Colors.white),
+            displayMedium: TextStyle(color: Colors.white, fontSize: 35),
             titleMedium: TextStyle(
                 color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
             bodyMedium: TextStyle(

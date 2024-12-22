@@ -133,55 +133,58 @@ class _DetailMoviePageState extends State<DetailMoviePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Row(
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Icon(
-                      Icons.star_rate_rounded,
-                      color: Colors.yellow,
-                      size: 35,
+                    Text(
+                      'IMDB Rating',
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
-                    const SizedBox(width: 5),
-                    Column(
+                    Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          'IMDB Rating',
-                          style: Theme.of(context).textTheme.bodyMedium,
+                        const Icon(
+                          Icons.star_rate_rounded,
+                          color: Colors.yellow,
+                          size: 25,
                         ),
+                        const SizedBox(width: 5),
                         Text(selectedMovie.ratingMovie.toStringAsFixed(1)),
                       ],
                     ),
                   ],
                 ),
-                Row(
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Icon(
-                      Icons.access_time_filled,
-                      color: Colors.yellow,
-                      size: 35,
-                    ),
-                    const SizedBox(width: 5),
-                    Column(
+                    const Text('Duration'),
+                    Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('Duration'),
+                        const Icon(
+                          Icons.access_time_filled,
+                          color: Colors.yellow,
+                          size: 25,
+                        ),
+                        const SizedBox(width: 5),
                         Text(selectedMovie.movieDuration),
                       ],
                     ),
                   ],
                 ),
-                Row(
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Icon(
-                      Icons.calendar_today,
-                      color: Colors.yellow,
-                      size: 35,
-                    ),
-                    const SizedBox(width: 5),
-                    Column(
+                    const Text('Release Date'),
+                    Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('Release Date'),
+                        const Icon(
+                          Icons.calendar_today,
+                          color: Colors.yellow,
+                          size: 25,
+                        ),
+                        const SizedBox(width: 5),
                         Text(selectedMovie.releaseDate),
                       ],
                     ),

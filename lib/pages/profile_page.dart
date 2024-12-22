@@ -155,7 +155,7 @@ class ProfilePage extends StatelessWidget {
                     const SizedBox(height: 25),
                     Container(
                       width: double.infinity,
-                      height: 150,
+                      height: 200,
                       margin: const EdgeInsets.all(15),
                       padding: const EdgeInsets.all(20),
                       decoration: BoxDecoration(
