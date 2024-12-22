@@ -19,28 +19,31 @@ class ProfilePage extends StatelessWidget {
 
     Future<void> launchInstagram() async {
       final Uri url = Uri.parse(instagramUrl);
-      if (await canLaunchUrl(url)) {
-        await launchUrl(url, mode: LaunchMode.externalApplication);
-      } else {
-        throw 'Could not launch $instagramUrl';
+      try {
+        launchUrl(url, mode: LaunchMode.externalApplication);
+      } catch (e) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(e.toString())));
       }
     }
 
     Future<void> launchGithub() async {
       final Uri url = Uri.parse(githubUrl);
-      if (await canLaunchUrl(url)) {
+      try {
         await launchUrl(url, mode: LaunchMode.externalApplication);
-      } else {
-        throw 'Could not launch $githubUrl';
+      } catch (e) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(e.toString())));
       }
     }
 
     Future<void> launchLinkedin() async {
       final Uri url = Uri.parse(linkedinUrl);
-      if (await canLaunchUrl(url)) {
+      try {
         await launchUrl(url, mode: LaunchMode.externalApplication);
-      } else {
-        throw 'Could not launch $linkedinUrl';
+      } catch (e) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(e.toString())));
       }
     }
 
