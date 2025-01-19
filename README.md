@@ -1,16 +1,17 @@
 # movie_application
 
-A new Flutter project.
+This is a movie application that shows you many new movies.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+- clone repo
 
-A few resources to get you started if this is your first Flutter project:
+```
+ git clone https://github.com/GerilValdo/movie_application
+```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- get depedencies
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```
+dart pub get
+```
